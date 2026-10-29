@@ -1,0 +1,25 @@
+# Virtual environment
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large Dataset files & archives (>7GB)
+A Multi-View Raw Video Dataset of Seven Fitness Ex/
+*.zip
+*.tar.gz
+*.mp4
+*.avi
+*.mov
+
+# Temporary uploads / cache
+data/temp_*
+.streamlit/
+
+# OS / IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
