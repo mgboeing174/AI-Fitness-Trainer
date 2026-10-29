@@ -1,12 +1,23 @@
 import os
+import sys
+
+# Ensure repository root is in sys.path for cloud deployment
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
 import cv2
 import numpy as np
 import pandas as pd
 import joblib
 import streamlit as st
 import mediapipe as mp
-from src.feature_extraction import extract_landmark_features
-from src.exercise_tracker import ExerciseTracker
+try:
+    from src.feature_extraction import extract_landmark_features
+    from src.exercise_tracker import ExerciseTracker
+except ImportError:
+    from feature_extraction import extract_landmark_features
+    from exercise_tracker import ExerciseTracker
 
 # Setup Streamlit page configuration
 st.set_page_config(
@@ -60,8 +71,8 @@ st.markdown("""
 # Cache ML model loading
 @st.cache_resource
 def load_models():
-    squat_model_path = r"models\squat_form_classifier.joblib"
-    pushup_model_path = r"models\pushup_form_classifier.joblib"
+    squat_model_path = os.path.join(ROOT_DIR, "models", "squat_form_classifier.joblib")
+    pushup_model_path = os.path.join(ROOT_DIR, "models", "pushup_form_classifier.joblib")
     
     models = {}
     if os.path.exists(squat_model_path):
