@@ -1,6 +1,6 @@
 opencv-python-headless
-mediapipe==0.10.13
-numpy
+mediapipe
+numpy<2.0.0
 scikit-learn
 joblib
 streamlit
